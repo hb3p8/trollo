@@ -1,25 +1,176 @@
 #root {
-  max-width: 1280px;
-  max-height: 800px;
-  margin: 0 auto;
-  padding: 2rem;
+  max-width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  background: linear-gradient(135deg, #0079bf 0%, #005a8b 100%);
 }
 
 header {
   text-align: center;
   margin-bottom: 2rem;
+  color: white;
+}
+
+header h1 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 2rem;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 footer {
-  margin-top: 2rem;
+  margin-top: auto;
+  padding-top: 2rem;
+  text-align: center;
+}
+
+.board {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.board > button {
+  min-width: 280px;
+  height: fit-content;
+  background: rgba(255, 255, 255, 0.24);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 500;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.board > button:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+article {
+  min-width: 280px;
+  max-width: 280px;
+  background: #f1f2f4;
+  border-radius: 12px;
+  padding: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  height: fit-content;
+}
+
+article h3 {
+  margin: 0 0 0.75rem 0;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #172b4d;
+  border-radius: 3px;
+  min-height: 1.2em;
+  word-wrap: break-word;
+  outline: none;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+article h3:focus {
+  border-color: #0079bf;
+  background: white;
+}
+
+article h3:empty::before {
+  content: "Enter column title...";
+  color: #8c9bad;
+  font-weight: normal;
+}
+
+article > button {
+  width: 100%;
+  background: #ebecf0;
+  border: none;
+  border-radius: 8px;
+  color: #5e6c84;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  cursor: pointer;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+article > button:hover {
+  background: #dfe1e6;
+  color: #172b4d;
 }
 
 #task-list {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.task {
+  background: white;
+  border-radius: 8px;
+  padding: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  transition: box-shadow 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.task:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.task:focus-within {
+  border-color: #0079bf;
+  box-shadow: 0 2px 6px rgba(0, 121, 191, 0.25);
+}
+
+.task input[type="checkbox"] {
+  margin: 0;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  border: 2px solid #dfe1e6;
+  background: white;
+  cursor: pointer;
+}
+
+.task input[type="checkbox"]:checked {
+  background: #0079bf;
+  border-color: #0079bf;
+}
+
+.task input[type="text"] {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  color: #172b4d;
+  padding: 0;
+  outline: none;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.task input[type="text"]:focus {
+  background: transparent;
+}
+
+.task input[type="text"]::placeholder {
+  color: #8c9bad;
 }
 
 #automerge-logo {
@@ -27,29 +178,51 @@ footer {
   height: auto;
   margin-right: 10px;
   vertical-align: middle;
-}
-
-.task {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-  margin-bottom: 1em;
-}
-
-.task input {
-  margin: 0;
-}
-
-.task input[type="text"] {
-  background-color: var(--pico-secondary-background);
-}
-
-.task input[type="checkbox"]:not(:checked) {
-  background-color: var(--pico-secondary-background);
+  filter: brightness(0) invert(1);
 }
 
 .read-the-docs {
-  color: #888;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  #root {
+    padding: 0.5rem;
+  }
+  
+  .board {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  article, .board > button {
+    min-width: 100%;
+    max-width: 100%;
+  }
+  
+  header h1 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Scrollbar styling for board */
+.board::-webkit-scrollbar {
+  height: 8px;
+}
+
+.board::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.board::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+}
+
+.board::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }

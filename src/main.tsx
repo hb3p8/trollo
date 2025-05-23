@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App, { type TaskList } from './App.tsx'
+import App, { type Board } from './App.tsx'
 
 import './index.css'
 
@@ -23,7 +23,7 @@ let handle
 if (isValidAutomergeUrl(rootDocUrl)) {
   handle = await repo.find(rootDocUrl)
 } else {
-  handle = repo.create<TaskList>({tasks: []})
+  handle = repo.create<Board>({columns: [{ tasks: []}]})
 }
 const docUrl = document.location.hash = handle.url
 
